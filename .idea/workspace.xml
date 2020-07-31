@@ -2,12 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/TungCase/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TungCase/img/background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TungCase/img/bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TungCase/img/bullet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TungCase/js/plane.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/bullet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intro/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/intro/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intro/img/bullet1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/intro/img/enemy1.png" beforeDir="false" afterPath="$PROJECT_DIR$/intro/img/enemy1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/intro/img/enemy2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/intro/img/enemy3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bar1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bar2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bar3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bar4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bar5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bar6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bar7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bo9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/bobo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/chaibia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/img/thungbia.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/TungCase/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/nhacNen.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/TungCase/nhacNen.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/ghidiem.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen6.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen7.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen8.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intro/audio/nhacnen.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/intro/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,11 +74,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -51,11 +96,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1596165859589</updated>
-      <workItem from="1596165860762" duration="19306000" />
+      <workItem from="1596165860762" duration="24262000" />
+      <workItem from="1596193995318" duration="1898000" />
+      <workItem from="1596203334590" duration="4267000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

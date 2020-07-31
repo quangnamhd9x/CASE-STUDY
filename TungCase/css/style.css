@@ -1,0 +1,16 @@
+body {
+    background-image: url("../img/bg.jpg");
+}
+canvas {
+
+}
+table {
+    margin: auto;
+}
+#score {
+    color: aqua;
+    size: 50px;
+}
+div {
+    font-family: sans-serif;
+}

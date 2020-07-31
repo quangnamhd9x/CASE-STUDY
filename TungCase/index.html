@@ -2,147 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HỨNG BIA</title>
+    <title></title>
     <link rel="stylesheet" href="Tung.css">
+    <script src="js/plane.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body onload="StartGame()">
 <table>
     <tr>
-        <td rowspan="2"><canvas id="myCanvas"
-        width="800" height="585" style="border:1px solid #d3d3d3;background-image: url('img/bar3.png')">
-        </canvas></td>
-        <td> <div><label id="score"></label></div> </td>
-        <td> <div><label id="mang"></label></div> </td>
+        <td>
+            <canvas id="myCanvas"
+                    width="900" height="585"
+                    style="border:1px solid orangered;background-image: url('img/background.png')">
+            </canvas>
+        </td>
+        <div><label id="score"></label></div>
     </tr>
-    <tr>
-         <td colspan="2"> <img src="img/bo0.jpg" style="width: 450px;height: 500px; float: left" id="image"> </td>
-    </tr>
+    <script>
+        let score = 0;
+        let canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+        let enemy = [];
+        let bullet = [];
+        let countbullet = 0;
+        let count = 0;
+        let plane;
+        let nhacNen;
+        let soundGetScore;
+        let speed = 4;
+        let remainPoint = 0;
+        let imgID = 0;
+        let timeID;
+        let timeID2;
+        let timeID3;
+        window.addEventListener("mousemove", moveMouse)
+        let Plane = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.image = new Image();
+            this.image.src = "img/plane.png";
+            this.creatPlane = function () {
+                ctx.drawImage(this.image, this.x, this.y, 70, 70);
+            }
+            this.checkDiem = function (point) {
+                if ((point.x > this.x && point.x + 30 < this.x + 200)
+                    && (point.y + 100 > this.y && point.y < this.y + 150)) {
+                    point.y += 800;
+                    score += 1;
+                    remainPoint += 1;
+                    soundGetScore.play();
+                }
+            }
+        };
+        let Enemy = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.move = speed;
+            this.image = new Image();
+            this.image.src = "img/enemy.png";
+            this.creatEnemy = function () {
+                this.y += this.move;
+                ctx.drawImage(this.image, this.x, this.y, 70, 70);
+            }
+        };
+        function creatNewEnemy() {
+            count++;
+            let randomX = Math.floor(Math.random() * (1000)) + 50;
+            enemy[count] = new Enemy(randomX, -100);
+        }
+        let Bullet = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.move = speed + 10;
+            this.image = new Image();
+            this.image.src = "img/bullet.png";
+            this.creatBullet = function () {
+                this.y += this.move;
+                ctx.drawImage(this.image, this.x, this.y, 20, 20);
+            }
+        };
+        function creatNewBullet() {
+            countbullet++;
+            let randomX = Math.floor(Math.random() * (1000)) + 50;
+            bullet[countbullet] = new Bullet(randomX, -100);
+        }
+        function StartGame() {
+            let randomX = Math.floor(Math.random() * (700)) + 1;
+            enemy[count] = new Enemy(randomX, -100);
+            bullet[countbullet] = new Bullet(randomX, -100);
+            plane = new Plane(300, 500);
+            soundAll();
+            timeID = setInterval(drawALL, 30);
+            timeID2 = setInterval(creatNewEnemy, 1000);
+            timeID3 = setInterval(creatNewBullet, 500);
+        }
+
+        function soundAll() {
+            nhacNen = new Audio("sound/nhacnen.mp3");
+            soundGetScore = new Audio("sound/ghidiem.mp3");
+        }
+
+        function hardPlus() {
+            if (remainPoint > 20) {
+                imgID++;
+                speed += 3;
+                remainPoint = 0;
+            }
+        }
+        function drawALL() {
+            ctx.clearRect(0, 0, 900, 585);
+            for (let i = 0; i < enemy.length; i++) {
+                enemy[i].creatEnemy();
+                plane.checkDiem(enemy[i]);
+            }
+            hardPlus(score);
+            plane.creatPlane();
+            document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
+            nhacNen.play();
+        }
+        function moveMouse(evt) {
+            let canvas_x = evt.pageX - 9;
+            plane.x = canvas_x - 200;
+        }
+
+    </script>
 </table>
-<script>
-    var score = 0;
-    var mang = 10;
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    let chaibia = [];
-    let count = 0;
-    var thungbia;
-    var nhacNen;
-    var soundmiss;
-    var soundEndGame;
-    var soundGetScore;
-    let speed = 10;
-    let remainPoint = 0;
-    let imgID =0;
-    let timeID;
-    let timeID2;
-    window.addEventListener("mousemove", moveMouse)
-
-    let ThungBia = function (x,y) {
-        this.x = x;
-        this.y = y;
-        this.image = new Image();
-        this.image.src = "img/thungbia.png";
-        this.creatThungBia = function () {
-            ctx.drawImage(this.image,this.x,this.y,200,150);
-        }
-
-        this.checkDiem =function (biabia) {
-            if ((biabia.x > this.x && biabia.x+30 <this.x+200)
-                && (biabia.y+100>this.y && biabia.y<this.y+150) ){
-                biabia.y += 800;
-                biabia.isExist = false;
-                score+=100;
-                remainPoint+=100;
-                soundGetScore.play();
-            }
-            if (biabia.y > c.height && biabia.isExist && !biabia.countAlready) {
-                mang--;
-                soundmiss.play();
-                biabia.countAlready = true;
-            }
-        }
-    };
-
-    let ChaiBia = function (x,y) {
-        this.x = x;
-        this.y = y;
-        this.dy = speed;
-        this.isExist = true;
-        this.countAlready = false;
-        this.image = new Image();
-        this.image.src = "img/chaibia.png";
-        this.creatChaiBia = function () {
-            this.y += this.dy;
-            ctx.drawImage(this.image, this.x, this.y, 30, 100);
-        }
-    };
-
-    function StartGame(){
-        let randomX = Math.floor(Math.random() * (700)) + 1;
-        chaibia[count] = new ChaiBia(randomX,-100);
-        thungbia = new ThungBia(300,420);
-        soundAll();
-        timeID = setInterval(drawALL,30);
-        timeID2 = setInterval(creatNewChaiBia,250);
-    }
-
-    function soundAll() {
-        let soundrandom = Math.floor(Math.random() * (8)) + 1;
-        nhacNen = new Audio("sound/nhacnen"+soundrandom+".mp3");
-        soundmiss = new Audio("sound/break.wav");
-        soundEndGame = new Audio("sound/laugh.wav");
-        soundGetScore = new Audio("sound/ghidiem.wav");
-    }
-
-    function drawALL() {
-        ctx.clearRect(0, 0, 800, 585);
-        for (let i = 0; i <chaibia.length ; i++) {
-            chaibia[i].creatChaiBia();
-            thungbia.checkDiem(chaibia[i]);
-        }
-        thayAnh(score);
-        thungbia.creatThungBia();
-        document.getElementById('score').innerHTML ="Điểm: "+ score;
-        document.getElementById('mang').innerHTML ="Mạng: "+ mang;
-        nhacNen.play();
-        endGame(mang);
-    }
-
-    function creatNewChaiBia() {
-        count++;
-        let randomX = Math.floor(Math.random() * (700)) + 1;
-        chaibia[count] = new ChaiBia(randomX,-100);
-    }
-
-    function moveMouse(evt) {
-        let canvas_x = evt.pageX -9;
-        thungbia.x = canvas_x - 100;
-    }
-
-    function thayAnh() {
-        if (remainPoint>2000) {
-            imgID++;
-            document.getElementById('image').src = "img/bo"+imgID+".jpg";
-            speed +=5;
-            remainPoint = 0;
-        }
-    }
-
-    function endGame(tim) {
-        if (tim <= 0) {
-            clearInterval(timeID);
-            clearInterval(timeID2);
-            nhacNen.pause();
-           thongBao = window.confirm("Thua mất rồi!!! Muốn chơi nữa hông?")
-            if (thongBao){
-                window.location.reload();
-            }
-            else {
-                document.getElementById('image').src = "img/bobo.jpg";
-                soundEndGame.play();
-            }
-        }
-    }
-</script>
 </body>
 </html>
