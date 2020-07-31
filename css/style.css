@@ -1,0 +1,5 @@
+canvas {
+    background-image: url("../img/galaxy1.jpg");
+    background-repeat: round;
+    border: 1px solid darkblue;
+}

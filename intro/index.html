@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=0.7,user-scalable=no" />
+		<title>GAME BẮM MÁY BAY SIÊU KINH ĐIỂN</title>
+		<style type="text/css">
+			/*reset.css*/	
+			* {
+				margin: 0;
+				padding: 0;
+			}
+		
+			body {
+				
+			}			
+			#map {
+				display: block;
+			}			
+			#loading {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				text-align: center;
+				transform: translate(-50%, -50%);
+			}
+			
+			#current-score {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			
+			#menu {
+				width: 160px;
+				height: 160px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				list-style-type: none;
+				text-align: center;
+				border: 1px solid black;
+				border-radius: 5px;
+				background-color: #BBC1C2;
+				font-size: 20px;
+				line-height: 40px;
+				display: none;
+			}
+			
+			#end-score {
+				line-height: 80px;
+				border-top: 1px solid black;
+				border-bottom: 1px solid black;
+			}
+			
+			#restart {
+				cursor: pointer;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--Map-->
+		<canvas id="map"></canvas>
+		<!--load game-->
+		<div id="loading">
+			<img src="img/loading.gif" />
+			<p>Đang tải..</p>
+		</div>
+		<!--Đểm số-->
+		<p id="current-score">Thành tích: <span>0</span></p>
+		<!--Menu-->
+		<ul id="menu">
+			<li>Điểm của bạn</li>
+			<li id="end-score">0</li>
+			<li id="restart">Chơi lại</li>
+		</ul>
+
+		<script type="text/javascript">
+		  var mapCanvas = document.getElementById("map");
+		  var ctx = mapCanvas.getContext("2d");
+		  var loadingDiv = document.getElementById("loading");
+		  var scoreSpan = document.querySelector("#current-score>span");
+		  var menuUl = document.getElementById("menu");
+		  var endScoreLi = document.getElementById("end-score");
+		  var restartLi = document.getElementById("restart");
+		  mapCanvas.width = document.documentElement.clientWidth;
+		  mapCanvas.height = document.documentElement.clientHeight;
+		  var picsnames = ["background.png", "bullet1.png", "bullet2.png", "enemy1.png", "enemy2.png", "enemy3.png", "herofly.png", "loading.gif", "prop.png"];
+		  var musicNames = ["bullet.mp3", "enemy1_down.mp3", "enemy2_down.mp3", "enemy3_down.mp3", "game_music.mp3", "game_over.mp3"];
+		  var picCount = 0;
+		  var musicCount = 0;
+		  var musics = [];
+		  for (var i = 0; i < picsnames.length; i++) {
+		  	var img = new Image();
+		  	img.src = "img/" + picsnames[i];
+		  	img.onload = function() {
+		  		picCount++;
+		  		if (picCount == picsnames.length) {
+		  			loadMusic();
+		  		}
+		  	}
+		  }
+		  
+		  function loadMusic() {
+		  	for (var i = 0; i < musicNames.length; i++) {
+		  		var music = new Audio();
+		  		music.src = "audio/" + musicNames[i];
+		  		musics.push(music);
+		  		music.onloadedmetadata = function() {
+		  			musicCount++;
+		  			if (musicCount == musicNames.length) {
+		  				loadingDiv.style.display = "none";
+		  				main();
+		  				musics[4].volume = 0.5;
+		  				musics[4].loop = true;
+		  				musics[4].play();
+		  			}
+		  		}
+		  	}
+		  }
+		  var bgImage = new Image();
+		  bgImage.src = "img/background.png";
+		  var background = {
+		  	x: 0,
+		  	y: 0,
+		  	w: mapCanvas.width,
+		  	h: mapCanvas.height,
+		  	draw: function() {
+		  		var row = Math.ceil(mapCanvas.height / 568);
+		  		var col = Math.ceil(mapCanvas.width / 320);
+		  		for (var i = -row; i < row; i++) {
+		  			for (var j = 0; j < col; j++) {
+		  				ctx.drawImage(bgImage, 320 * j, 568 * i + this.y);
+		  			}
+		  		}
+		  	},
+		  	move: function() {
+		  		this.y++;
+		  		var row = Math.ceil(mapCanvas.height / 568);
+		  		if (this.y == row * 568) {
+		  			this.y = 0;
+		  		}
+		  	},
+		  };
+		  var heroImg = new Image();
+		  heroImg.src = "img/herofly.png";
+		  var bulletImg1 = new Image();
+		  bulletImg1.src = "img/bullet1.png";
+		  var bulletImg2 = new Image();
+		  bulletImg2.src = "img/bullet2.png";
+		  var hero = {
+		  	x: mapCanvas.width / 2 - 33,
+		  	y: mapCanvas.height - 82 - 100,
+		  	w: 66,
+		  	h: 82,
+		  	i: 0,
+		  	flagI: 0,
+		  	bullets: [],
+		  	flagShot: 0,
+		  	armType: 0,
+		  	boom: false,
+		  	draw: function() {
+		  		this.flagI++;
+		  		if (this.flagI == 10) {
+		  			if (this.boom) {
+		  				this.i++;
+		  				if (this.i == 5) {
+		  					gameOver();
+		  				}
+		  			}
+		  			else {
+		  				this.i = (this.i++) % 2;
+		  			}
+		  			this.flagI = 0;
+		  		}
+		  		ctx.drawImage(heroImg, this.i * this.w, 0, this.w, this.h, this.x, this.y, this.w, this.h);
+		  	},
+		  	shot: function() {
+		  		if (!this.boom) {
+		  			this.flagShot++;
+		  		}
+		  		if (this.flagShot == 5) {
+		  			musics[0].play();
+		  			if (this.armType) {
+		  				var bullet = new Bullet(this.x + this.w / 2 - 24, this.y + 20, 48, 14, bulletImg2, 2);
+		  			}
+		  			else {
+		  				var bullet = new Bullet(this.x + this.w / 2 - 2, this.y - 14, 6, 14, bulletImg1, 1);
+		  			}
+		  			this.bullets.push(bullet);
+		  			this.flagShot = 0;
+		  		}
+		  		for (var i = 0; i < this.bullets.length; i++) {
+		  			if (this.bullets[i].y <= -this.bullets[i].h) {
+		  				this.bullets.splice(i, 1);
+		  				i--;
+		  			}
+		  			else {
+		  				this.bullets[i].move();
+		  				this.bullets[i].draw();
+		  			}
+		  		}
+		  	},
+		  }
+		  mapCanvas.onmousedown = function(event) {
+		  	var x = event.offsetX;
+		  	var y = event.offsetY;
+		  	if (x >= hero.x && x <= hero.x + hero.w && y >= hero.y && y <= hero.y + hero.h) {
+		  		mapCanvas.onmousemove = function(event) {
+		  			hero.x = event.offsetX - hero.w / 2;
+		  			hero.y = event.offsetY - hero.h / 2;
+		  		}
+		  	}
+		  }
+		  mapCanvas.onmouseup = function() {
+		  	mapCanvas.onmousemove = null;
+		  }
+		  mapCanvas.ontouchstart = function(event) {
+		  	var x = event.touches[0].clientX;
+		  	var y = event.touches[0].clientY;
+		  	if (x >= hero.x && x <= hero.x + hero.w && y >= hero.y && y <= hero.y + hero.h) {
+		  		mapCanvas.ontouchmove = function(event) {
+		  			hero.x = event.touches[0].clientX - hero.w / 2;
+		  			hero.y = event.touches[0].clientY - hero.h / 2;
+		  			event.preventDefault();
+		  		}
+		  	}
+		  }
+		  mapCanvas.ontouchend = function() {
+		  	mapCanvas.ontouchmove = null;
+		  }
+		  
+		  function Bullet(x, y, w, h, img, hurt) {
+		  	this.x = x;
+		  	this.y = y;
+		  	this.w = w;
+		  	this.h = h;
+		  	this.img = img;
+		  	this.hurt = hurt;
+		  }
+		  Bullet.prototype.draw = function() {
+		  	ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+		  }
+		  Bullet.prototype.move = function() {
+		  	this.y -= 15;
+		  }
+		  
+		  function Enemy(x, y, w, h, img, speed, hp, score, maxI) {
+		  	this.x = x;
+		  	this.y = y;
+		  	this.w = w;
+		  	this.h = h;
+		  	this.img = img;
+		  	this.speed = speed;
+		  	this.hp = hp;
+		  	this.score = score;
+		  	this.boom = false;
+		  	this.i = 0;
+		  	this.maxI = maxI;
+		  	this.isDie = false;
+		  	this.flagI = 0;
+		  }
+		  Enemy.prototype.draw = function() {
+		  	if (this.boom) {
+		  		this.flagI++;
+		  		if (this.flagI == 5) {
+		  			this.i++;
+		  			if (this.i == this.maxI) {
+		  				this.isDie = true;
+		  			}
+		  			this.flagI = 0;
+		  		}
+		  	}
+		  	ctx.drawImage(this.img, this.i * this.w, 0, this.w, this.h, this.x, this.y, this.w, this.h);
+		  }
+		  Enemy.prototype.move = function() {
+		  	this.y += this.speed;
+		  }
+		  
+		  function random(x, y) {
+		  	return parseInt(Math.random() * (y - x + 1) + x);
+		  }
+		  var enemyImg1 = new Image();
+		  enemyImg1.src = "img/enemy1.png";
+		  var enemyImg2 = new Image();
+		  enemyImg2.src = "img/enemy2.png";
+		  var enemyImg3 = new Image();
+		  enemyImg3.src = "img/enemy3.png";
+		  var enemies = [];
+		  
+		  function randomEnemy() {
+		  	var num = random(1, 1000);
+		  	if (num <= 50) {
+		  		if (num <= 40) {
+		  			var randomX = random(0, mapCanvas.width - 38);
+		  			var randomSpeed = random(2, 10);
+		  			var enemy = new Enemy(randomX, -34, 38, 34, enemyImg1, randomSpeed, 1, 100, 5);
+		  			enemies.push(enemy);
+		  		}
+		  		else if (num <= 48) {
+		  			var randomX = random(0, mapCanvas.width - 46);
+		  			var randomSpeed = random(2, 6);
+		  			var enemy = new Enemy(randomX, -64, 46, 64, enemyImg2, randomSpeed, 5, 500, 6);
+		  			enemies.push(enemy);
+		  		}
+		  		else {
+		  			var randomX = random(0, mapCanvas.width - 110);
+		  			var randomSpeed = random(2, 4);
+		  			var enemy = new Enemy(randomX, -164, 110, 164, enemyImg3, randomSpeed, 10, 1000, 10);
+		  			enemies.push(enemy);
+		  		}
+		  	}
+		  	for (var i = 0; i < enemies.length; i++) {
+		  		if (enemies[i].y >= mapCanvas.height || enemies[i].isDie) {
+		  			enemies.splice(i, 1);
+		  			i--;
+		  		}
+		  		else {
+		  			enemies[i].move();
+		  			enemies[i].draw();
+		  		}
+		  	}
+		  }
+		  var propImg = new Image();
+		  propImg.src = "img/prop.png";
+		  
+		  function Prop(x, y, w, h, type, speed) {
+		  	this.x = x;
+		  	this.y = y;
+		  	this.w = w;
+		  	this.h = h;
+		  	this.type = type;
+		  	this.speed = speed;
+		  	this.isUsed = false;
+		  }
+		  Prop.prototype.draw = function() {
+		  	ctx.drawImage(propImg, this.type * this.w, 0, this.w, this.h, this.x, this.y, this.w, this.h);
+		  }
+		  Prop.prototype.move = function() {
+		  	this.y += this.speed;
+		  }
+		  var props = [];
+		  
+		  function randomProp() {
+		  	if (random(1, 1000) <= 20) {
+		  		var randomX = random(0, mapCanvas.width - 38);
+		  		var randomType = random(0, 1);
+		  		var randomSpeed = random(5, 10);
+		  		var prop = new Prop(randomX, -68, 38, 68, randomType, randomSpeed);
+		  		props.push(prop);
+		  	}
+		  	for (var i = 0; i < props.length; i++) {
+		  		if (props[i].y >= mapCanvas.height || props[i].isUsed) {
+		  			props.splice(i, 1);
+		  			i--;
+		  		}
+		  		else {
+		  			props[i].move();
+		  			props[i].draw();
+		  		}
+		  	}
+		  }
+		  
+		  function crash(obj1, obj2) {
+		  	var left1 = obj1.x;
+		  	var right1 = obj1.x + obj1.w;
+		  	var top1 = obj1.y;
+		  	var bottom1 = obj1.y + obj1.h;
+		  	var left2 = obj2.x;
+		  	var right2 = obj2.x + obj2.w;
+		  	var top2 = obj2.y;
+		  	var bottom2 = obj2.y + obj2.h;
+		  	if (right1 < left2 || bottom1 < top2 || left1 > right2 || top1 > bottom2) {
+		  		return false;
+		  	}
+		  	else {
+		  		return true;
+		  	}
+		  }
+		  var timeout = null;
+		  
+		  function justify() {
+		  	for (var i = 0; i < props.length; i++) {
+		  		if (hero.boom) {
+		  			continue;
+		  		}
+		  		if (!crash(props[i], hero)) {
+		  			continue;
+		  		}
+		  		if (props[i].type) {
+		  			hero.armType = 1;
+		  			clearTimeout(timeout);
+		  			timeout = setTimeout(function() {
+		  				hero.armType = 0;
+		  			}, 9000);
+		  		}
+		  		else {
+		  			for (var j = 0; j < enemies.length; j++) {
+		  				enemies[j].boom = true;
+		  				scoreSpan.innerHTML = parseInt(scoreSpan.innerText) + enemies[j].score;
+		  			}
+		  		}
+		  		props[i].isUsed = true;
+		  	}
+		  	for (var i = 0; i < enemies.length; i++) {
+		  		for (var j = 0; j < hero.bullets.length; j++) {
+		  			if (enemies[i].boom) {
+		  				break;
+		  			}
+		  			if (!crash(enemies[i], hero.bullets[j])) {
+		  				continue;
+		  			}
+		  			enemies[i].hp -= hero.bullets[j].hurt;
+		  			if (enemies[i].hp <= 0) {
+		  				enemies[i].boom = true;
+		  				scoreSpan.innerHTML = parseInt(scoreSpan.innerText) + enemies[i].score;
+		  				switch (enemies[i].score) {
+		  					case 100:
+		  						musics[1].play();
+		  						break;
+		  					case 500:
+		  						musics[2].play();
+		  						break;
+		  					case 1000:
+		  						musics[3].play();
+		  						break;
+		  					default:
+		  						break;
+		  				}
+		  			}
+		  			hero.bullets.splice(j, 1);
+		  			j--;
+		  		}
+		  	}
+		  	for (var i = 0; i < enemies.length; i++) {
+		  		if (enemies[i].boom) {
+		  			continue;
+		  		}
+		  		if (crash(enemies[i], hero)) {
+		  			hero.boom = true;
+		  		}
+		  	}
+		  }
+		  
+		  function main() {
+		  	ctx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
+		  	background.draw();
+		  	background.move();
+		  	hero.draw();
+		  	hero.shot();
+		  	randomEnemy();
+		  	randomProp();
+		  	if (!hero.boom) {
+		  		justify();
+		  	}
+		  	requestAnimationFrame(main);
+		  }
+		  window.onresize = function() {
+		  	mapCanvas.width = document.documentElement.clientWidth;
+		  	mapCanvas.height = document.documentElement.clientHeight;
+		  	background.draw();
+		  }
+		  
+		  function gameOver() {
+		  	musics[4].pause();
+		  	musics[5].play();
+		  	endScoreLi.innerText = scoreSpan.innerText;
+		  	menuUl.style.display = "block";
+		  }
+		  restartLi.onclick = function() {
+		  	location.href = location.href + "?id=" + 10000 * Math.random();
+		  }
+		</script>
+	</body>
+</html>
