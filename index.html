@@ -36,6 +36,10 @@
             let canvas_x = event.pageX - 9;
             plane.x = canvas_x - 200;
         }
+        function music() {
+            nhacNen = new Audio("sound/nhacnen.mp3");
+            soundGetScore = new Audio("sound/killer.mp3");
+        }
         let Plane = function (x, y) {
             this.x = x;
             this.y = y;
@@ -44,16 +48,8 @@
             this.creatPlane = function () {
                 ctx.drawImage(this.image, this.x, this.y, 70, 70);
             }
-            this.checkDiem = function (point) {
-                if ((point.x > this.x && point.x + 30 < this.x + 200)
-                    && (point.y + 100 > this.y && point.y < this.y + 150)) {
-                    point.y += 800;
-                    score += 1;
-                    remainPoint += 1;
-                    soundGetScore.play();
-                }
-            }
         };
+
         let Enemy = function (x, y) {
             this.x = x;
             this.y = y;
@@ -64,6 +60,15 @@
                 this.y += this.move;
                 ctx.drawImage(this.image, this.x, this.y, 70, 70);
             }
+            this.checkPoint = function (point) {
+                if ((point.x > this.x && point.x + 30 < this.x + 200)
+                    && (point.y + 100 > this.y && point.y < this.y + 150)) {
+                    point.y += 800;
+                    score += 1;
+                    remainPoint += 1;
+                    soundGetScore.play();
+                }
+            }
         };
 
         function creatNewEnemy() {
@@ -71,7 +76,6 @@
             let randomX = Math.floor(Math.random() * (1000)) + 50;
             enemy[count] = new Enemy(randomX, -100);
         }
-
         let Bullet = function (x, y) {
             this.x = x;
             this.y = y;
@@ -81,6 +85,15 @@
             this.creatBullet = function () {
                 this.y -= this.move;
                 ctx.drawImage(this.image, this.x, this.y, 50, 50);
+            }
+            this.checkPoint = function (point) {
+                if ((point.x > this.x && point.x + 30 < this.x + 200)
+                    && (point.y + 100 > this.y && point.y < this.y + 150)) {
+                    point.y += 800;
+                    score += 1;
+                    remainPoint += 1;
+                    soundGetScore.play();
+                }
             }
         };
 
@@ -101,19 +114,16 @@
             ping3 = setInterval(creatNewBullet, 100);
         }
 
-        function music() {
-            nhacNen = new Audio("sound/nhacnen.mp3");
-            soundGetScore = new Audio("sound/killer.mp3");
-        }
+
 
         function drawALL() {
             ctx.clearRect(0, 0, 900, 585);
             for (let i = 0; i < enemy.length; i++) {
                 enemy[i].creatEnemy();
-                plane.checkDiem(enemy[i]);
             }
-            for (let i = 0; i < bullet.length; i++) {
-                bullet[i].creatBullet();
+            for (let j = 0; j < bullet.length; j++) {
+                bullet[j].creatBullet();
+                // this.creatBullet.checkPoint(bullet[j]);
             }
             if (remainPoint > 20) {
                 speed += 3;
@@ -123,9 +133,6 @@
             document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
             nhacNen.play();
         }
-
-
-
     </script>
 </table>
 </body>
