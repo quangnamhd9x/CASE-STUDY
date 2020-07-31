@@ -3,69 +3,12 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=0.7,user-scalable=no" />
-		<title>GAME BẮM MÁY BAY SIÊU KINH ĐIỂN</title>
-		<style type="text/css">
-			/*reset.css*/	
-			* {
-				margin: 0;
-				padding: 0;
-			}
-		
-			body {
-				
-			}			
-			#map {
-				display: block;
-			}			
-			#loading {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				text-align: center;
-				transform: translate(-50%, -50%);
-			}
-			
-			#current-score {
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-			
-			#menu {
-				width: 160px;
-				height: 160px;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				list-style-type: none;
-				text-align: center;
-				border: 1px solid black;
-				border-radius: 5px;
-				background-color: #BBC1C2;
-				font-size: 20px;
-				line-height: 40px;
-				display: none;
-			}
-			
-			#end-score {
-				line-height: 80px;
-				border-top: 1px solid black;
-				border-bottom: 1px solid black;
-			}
-			
-			#restart {
-				cursor: pointer;
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				user-select: none;
-			}
-		</style>
+		<title>SHOT PLANE</title>
+		<link rel="stylesheet" href="css/style.css">
 	</head>
 
 	<body>
-		<!--Map-->
+	<audio src="/audio/nhacnen.mp3" autoplay></audio>
 		<canvas id="map"></canvas>
 		<!--load game-->
 		<div id="loading">
@@ -101,12 +44,12 @@
 		  	img.src = "img/" + picsnames[i];
 		  	img.onload = function() {
 		  		picCount++;
-		  		if (picCount == picsnames.length) {
+		  		if (picCount === picsnames.length) {
 		  			loadMusic();
 		  		}
 		  	}
 		  }
-		  
+
 		  function loadMusic() {
 		  	for (var i = 0; i < musicNames.length; i++) {
 		  		var music = new Audio();
@@ -114,7 +57,7 @@
 		  		musics.push(music);
 		  		music.onloadedmetadata = function() {
 		  			musicCount++;
-		  			if (musicCount == musicNames.length) {
+		  			if (musicCount === musicNames.length) {
 		  				loadingDiv.style.display = "none";
 		  				main();
 		  				musics[4].volume = 0.5;
@@ -132,8 +75,8 @@
 		  	w: mapCanvas.width,
 		  	h: mapCanvas.height,
 		  	draw: function() {
-		  		var row = Math.ceil(mapCanvas.height / 568);
-		  		var col = Math.ceil(mapCanvas.width / 320);
+		  		var row = Math.ceil(mapCanvas.height / 2640);
+		  		var col = Math.ceil(mapCanvas.width / 1536);
 		  		for (var i = -row; i < row; i++) {
 		  			for (var j = 0; j < col; j++) {
 		  				ctx.drawImage(bgImage, 320 * j, 568 * i + this.y);
@@ -143,7 +86,7 @@
 		  	move: function() {
 		  		this.y++;
 		  		var row = Math.ceil(mapCanvas.height / 568);
-		  		if (this.y == row * 568) {
+		  		if (this.y === row * 568) {
 		  			this.y = 0;
 		  		}
 		  	},
@@ -167,10 +110,10 @@
 		  	boom: false,
 		  	draw: function() {
 		  		this.flagI++;
-		  		if (this.flagI == 10) {
+		  		if (this.flagI === 10) {
 		  			if (this.boom) {
 		  				this.i++;
-		  				if (this.i == 5) {
+		  				if (this.i === 5) {
 		  					gameOver();
 		  				}
 		  			}
@@ -185,7 +128,7 @@
 		  		if (!this.boom) {
 		  			this.flagShot++;
 		  		}
-		  		if (this.flagShot == 5) {
+		  		if (this.flagShot === 5) {
 		  			musics[0].play();
 		  			if (this.armType) {
 		  				var bullet = new Bullet(this.x + this.w / 2 - 24, this.y + 20, 48, 14, bulletImg2, 2);
@@ -235,7 +178,7 @@
 		  mapCanvas.ontouchend = function() {
 		  	mapCanvas.ontouchmove = null;
 		  }
-		  
+
 		  function Bullet(x, y, w, h, img, hurt) {
 		  	this.x = x;
 		  	this.y = y;
@@ -250,7 +193,7 @@
 		  Bullet.prototype.move = function() {
 		  	this.y -= 15;
 		  }
-		  
+
 		  function Enemy(x, y, w, h, img, speed, hp, score, maxI) {
 		  	this.x = x;
 		  	this.y = y;
@@ -269,9 +212,9 @@
 		  Enemy.prototype.draw = function() {
 		  	if (this.boom) {
 		  		this.flagI++;
-		  		if (this.flagI == 5) {
+		  		if (this.flagI === 5) {
 		  			this.i++;
-		  			if (this.i == this.maxI) {
+		  			if (this.i === this.maxI) {
 		  				this.isDie = true;
 		  			}
 		  			this.flagI = 0;
@@ -282,7 +225,7 @@
 		  Enemy.prototype.move = function() {
 		  	this.y += this.speed;
 		  }
-		  
+
 		  function random(x, y) {
 		  	return parseInt(Math.random() * (y - x + 1) + x);
 		  }
@@ -293,7 +236,7 @@
 		  var enemyImg3 = new Image();
 		  enemyImg3.src = "img/enemy3.png";
 		  var enemies = [];
-		  
+
 		  function randomEnemy() {
 		  	var num = random(1, 1000);
 		  	if (num <= 50) {
@@ -329,7 +272,7 @@
 		  }
 		  var propImg = new Image();
 		  propImg.src = "img/prop.png";
-		  
+
 		  function Prop(x, y, w, h, type, speed) {
 		  	this.x = x;
 		  	this.y = y;
@@ -346,7 +289,7 @@
 		  	this.y += this.speed;
 		  }
 		  var props = [];
-		  
+
 		  function randomProp() {
 		  	if (random(1, 1000) <= 20) {
 		  		var randomX = random(0, mapCanvas.width - 38);
@@ -366,7 +309,7 @@
 		  		}
 		  	}
 		  }
-		  
+
 		  function crash(obj1, obj2) {
 		  	var left1 = obj1.x;
 		  	var right1 = obj1.x + obj1.w;
@@ -384,7 +327,7 @@
 		  	}
 		  }
 		  var timeout = null;
-		  
+
 		  function justify() {
 		  	for (var i = 0; i < props.length; i++) {
 		  		if (hero.boom) {
@@ -447,7 +390,7 @@
 		  		}
 		  	}
 		  }
-		  
+
 		  function main() {
 		  	ctx.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
 		  	background.draw();
@@ -466,7 +409,7 @@
 		  	mapCanvas.height = document.documentElement.clientHeight;
 		  	background.draw();
 		  }
-		  
+
 		  function gameOver() {
 		  	musics[4].pause();
 		  	musics[5].play();

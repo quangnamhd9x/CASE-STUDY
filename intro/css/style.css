@@ -1,0 +1,60 @@
+/*reset.css*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+}
+#map {
+    display: block;
+}
+#loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+}
+
+#current-score {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#menu {
+    width: 160px;
+    height: 160px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style-type: none;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #BBC1C2;
+    font-size: 20px;
+    line-height: 40px;
+    display: none;
+}
+
+#end-score {
+    line-height: 80px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#restart {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+body {
+    background-image: url("../img/background.png");
+
+}
