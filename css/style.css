@@ -1,5 +1,21 @@
+body {
+    background-image: url("../img/bg.jpg");
+}
+
 canvas {
-    background-image: url("../img/galaxy1.jpg");
-    background-repeat: round;
-    border: 1px solid darkblue;
+    border: 1px solid orangered;
+    background-image: url('../img/background.png');
+}
+
+table {
+    margin: auto;
+}
+
+#score {
+    color: aqua;
+    size: 50px;
+}
+
+div {
+    font-family: sans-serif;
 }
