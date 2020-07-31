@@ -31,7 +31,11 @@
         let ping1;
         let ping2;
         let ping3;
-        window.addEventListener("mousemove", moveMouse)
+        window.addEventListener("mousemove", moveMouse);
+        function moveMouse(event) {
+            let canvas_x = event.pageX - 9;
+            plane.x = canvas_x - 200;
+        }
         let Plane = function (x, y) {
             this.x = x;
             this.y = y;
@@ -71,42 +75,35 @@
         let Bullet = function (x, y) {
             this.x = x;
             this.y = y;
-            this.move = speed + 10;
+            this.move = speed + 20;
             this.image = new Image();
             this.image.src = "img/bullet.png";
             this.creatBullet = function () {
-                this.y += this.move;
+                this.y -= this.move;
                 ctx.drawImage(this.image, this.x, this.y, 50, 50);
             }
         };
 
         function creatNewBullet() {
             countbullet++;
-            let randomX = Math.floor(Math.random() * (900)) + 50;
-            bullet[countbullet] = new Bullet(randomX, -100);
+            let randomX = plane.x;
+            bullet[countbullet] = new Bullet(randomX + 10, plane.y);
         }
 
         function StartGame() {
             let randomX = Math.floor(Math.random() * (700)) + 1;
             enemy[count] = new Enemy(randomX, -100);
-            bullet[countbullet] = new Bullet(randomX, -100);
+            bullet[countbullet] = new Bullet(randomX, +100);
             plane = new Plane(300, 500);
-            soundAll();
+            music();
             ping1 = setInterval(drawALL, 30);
             ping2 = setInterval(creatNewEnemy, 1000);
-            ping3 = setInterval(creatNewBullet, 500);
+            ping3 = setInterval(creatNewBullet, 100);
         }
 
-        function soundAll() {
+        function music() {
             nhacNen = new Audio("sound/nhacnen.mp3");
-            soundGetScore = new Audio("sound/ghidiem.mp3");
-        }
-
-        function hardPlus() {
-            if (remainPoint > 20) {
-                speed += 3;
-                remainPoint = 0;
-            }
+            soundGetScore = new Audio("sound/killer.mp3");
         }
 
         function drawALL() {
@@ -117,18 +114,17 @@
             }
             for (let i = 0; i < bullet.length; i++) {
                 bullet[i].creatBullet();
-                plane.checkDiem(bullet[i]);
             }
-            hardPlus(score);
+            if (remainPoint > 20) {
+                speed += 3;
+                remainPoint = 0;
+            }
             plane.creatPlane();
             document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
             nhacNen.play();
         }
 
-        function moveMouse(event) {
-            let canvas_x = event.pageX - 9;
-            plane.x = canvas_x - 200;
-        }
+
 
     </script>
 </table>

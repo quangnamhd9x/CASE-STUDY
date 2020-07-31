@@ -3,21 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/Tung.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/img/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/img/bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/img/bullet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/img/enemy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/img/plane.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/js/plane.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/nhacNen.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/sound/break.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/sound/ghidiem.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/sound/laugh.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/sound/nhacnen.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TungCase/sound/soundmiss.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +55,7 @@
       <updated>1596165859589</updated>
       <workItem from="1596165860762" duration="24262000" />
       <workItem from="1596193995318" duration="1898000" />
-      <workItem from="1596203334590" duration="8963000" />
+      <workItem from="1596203334590" duration="10962000" />
     </task>
     <servers />
   </component>
