@@ -14,8 +14,10 @@
             </canvas>
         </td>
         <div><label id="score"></label></div>
+        <div><label id="mang"></label></div>
     </tr>
     <script>
+        let mang = 20;
         let score = 0;
         let canvas = document.getElementById("myCanvas");
         let ctx = canvas.getContext("2d");
@@ -34,7 +36,7 @@
         window.addEventListener("mousemove", moveMouse);
         function moveMouse(event) {
             let canvas_x = event.pageX - 9;
-            plane.x = canvas_x - 200;
+            plane.x = canvas_x - 260;
         }
         function music() {
             nhacNen = new Audio("sound/nhacnen.mp3");
@@ -54,21 +56,15 @@
             this.x = x;
             this.y = y;
             this.move = speed;
+            this.isExist = true;
+            this.countAlready = false;
             this.image = new Image();
             this.image.src = "img/enemy.png";
             this.creatEnemy = function () {
                 this.y += this.move;
                 ctx.drawImage(this.image, this.x, this.y, 70, 70);
             }
-            this.checkPoint = function (point) {
-                if ((point.x > this.x && point.x + 30 < this.x + 200)
-                    && (point.y + 100 > this.y && point.y < this.y + 150)) {
-                    point.y += 800;
-                    score += 1;
-                    remainPoint += 1;
-                    soundGetScore.play();
-                }
-            }
+
         };
 
         function creatNewEnemy() {
@@ -90,9 +86,14 @@
                 if ((point.x > this.x && point.x + 30 < this.x + 200)
                     && (point.y + 100 > this.y && point.y < this.y + 150)) {
                     point.y += 800;
+                    point.isExist = false;
                     score += 1;
                     remainPoint += 1;
                     soundGetScore.play();
+                }
+                if (point.y > canvas.height && point.isExist && !point.countAlready) {
+                    mang--;
+                    point.countAlready = true;
                 }
             }
         };
@@ -111,7 +112,7 @@
             music();
             ping1 = setInterval(drawALL, 30);
             ping2 = setInterval(creatNewEnemy, 1000);
-            ping3 = setInterval(creatNewBullet, 100);
+            ping3 = setInterval(creatNewBullet, 50);
         }
 
 
@@ -120,10 +121,10 @@
             ctx.clearRect(0, 0, 900, 585);
             for (let i = 0; i < enemy.length; i++) {
                 enemy[i].creatEnemy();
+                bullet[bullet.length - 11].checkPoint(enemy[i]);
             }
             for (let j = 0; j < bullet.length; j++) {
                 bullet[j].creatBullet();
-                // this.creatBullet.checkPoint(bullet[j]);
             }
             if (remainPoint > 20) {
                 speed += 3;
@@ -131,7 +132,20 @@
             }
             plane.creatPlane();
             document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
+            document.getElementById('mang').innerHTML ="Vào trái đất: " + mang;
             nhacNen.play();
+            endGame(mang);
+            function endGame(tim) {
+                if (tim === 0) {
+                    clearInterval(ping1);
+                    clearInterval(ping2);
+                    clearInterval(ping3);
+                    thongBao = window.confirm("Thua mất rồi!!! Muốn chơi nữa hông?")
+                    if (thongBao){
+                        window.location.reload();
+                    }
+                }
+            }
         }
     </script>
 </table>
