@@ -1,4 +1,4 @@
-let mang = 20;
+let mang = 0;
 let score = 0;
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
@@ -15,14 +15,17 @@ let ping1;
 let ping2;
 let ping3;
 window.addEventListener("mousemove", moveMouse);
+
 function moveMouse(event) {
     let canvas_x = event.pageX - 9;
     plane.x = canvas_x - 260;
 }
+
 function music() {
     nhacNen = new Audio("sound/nhacnen.mp3");
     soundGetScore = new Audio("sound/killer.mp3");
 }
+
 let Plane = function (x, y) {
     this.x = x;
     this.y = y;
@@ -31,8 +34,7 @@ let Plane = function (x, y) {
     this.creatPlane = function () {
         ctx.drawImage(this.image, this.x, this.y, 70, 70);
     }
-};
-
+}
 let Enemy = function (x, y) {
     this.x = x;
     this.y = y;
@@ -40,19 +42,20 @@ let Enemy = function (x, y) {
     this.isExist = true;
     this.countAlready = false;
     this.image = new Image();
-    this.image.src = "img/enemy2.png";
+    this.image.src = "img/enemy1.png";
     this.creatEnemy = function () {
         this.y += this.move;
         ctx.drawImage(this.image, this.x, this.y, 70, 70);
     }
 
-};
+}
 
 function creatNewEnemy() {
     count++;
     let randomX = Math.floor(Math.random() * (1000)) + 50;
     enemy[count] = new Enemy(randomX, -100);
 }
+
 let Bullet = function (x, y) {
     this.x = x;
     this.y = y;
@@ -61,7 +64,7 @@ let Bullet = function (x, y) {
     this.image.src = "img/bullet.png";
     this.creatBullet = function () {
         this.y -= this.move;
-        ctx.drawImage(this.image, this.x, this.y, 50, 50);
+        ctx.drawImage(this.image, this.x, this.y, 30, 50);
     }
     this.checkPoint = function (point) {
         if ((point.x > this.x && point.x + 30 < this.x + 200)
@@ -73,16 +76,15 @@ let Bullet = function (x, y) {
             soundGetScore.play();
         }
         if (point.y > canvas.height && point.isExist && !point.countAlready) {
-            mang--;
+            mang++;
             point.countAlready = true;
         }
     }
-};
+}
 
 function creatNewBullet() {
     countbullet++;
-    let randomX = plane.x;
-    bullet[countbullet] = new Bullet(randomX + 10, plane.y);
+    bullet[countbullet] = new Bullet(plane.x + 24, plane.y);
 }
 
 function StartGame() {
@@ -93,16 +95,14 @@ function StartGame() {
     music();
     ping1 = setInterval(drawALL, 30);
     ping2 = setInterval(creatNewEnemy, 1000);
-    ping3 = setInterval(creatNewBullet, 50);
+    ping3 = setInterval(creatNewBullet, 100);
 }
-
-
 
 function drawALL() {
     ctx.clearRect(0, 0, 900, 585);
     for (let i = 0; i < enemy.length; i++) {
         enemy[i].creatEnemy();
-        bullet[bullet.length - 11].checkPoint(enemy[i]);
+        bullet[bullet.length - 5].checkPoint(enemy[i]);
     }
     for (let j = 0; j < bullet.length; j++) {
         bullet[j].creatBullet();
@@ -113,16 +113,17 @@ function drawALL() {
     }
     plane.creatPlane();
     document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
-    document.getElementById('mang').innerHTML ="Vào trái đất: " + mang;
+    document.getElementById('mang').innerHTML = "Vào trái đất: " + mang;
     nhacNen.play();
     endGame(mang);
+
     function endGame(tim) {
-        if (tim === 0) {
+        if (tim === 20) {
             clearInterval(ping1);
             clearInterval(ping2);
             clearInterval(ping3);
             thongBao = window.confirm("YOU LOSE! Again?");
-            if (thongBao){
+            if (thongBao) {
                 window.location.reload();
             }
         }
