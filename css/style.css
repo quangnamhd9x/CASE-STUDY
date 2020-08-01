@@ -13,14 +13,15 @@ table {
 
 #score {
     color: aqua;
-    size: 50px;
+    font-size: 20px;
 }
 
 #mang {
-    color: aqua;
-    size: 50px;
+    color: red;
+    font-size: 20px;
 }
 
 div {
     font-family: sans-serif;
+    color: orangered;
 }

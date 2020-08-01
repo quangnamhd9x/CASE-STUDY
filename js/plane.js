@@ -64,7 +64,7 @@ let Bullet = function (x, y) {
     this.image.src = "img/bullet.png";
     this.creatBullet = function () {
         this.y -= this.move;
-        ctx.drawImage(this.image, this.x, this.y, 30, 50);
+        ctx.drawImage(this.image, this.x, this.y, 30, 60);
     }
     this.checkPoint = function (point) {
         if ((point.x > this.x && point.x + 30 < this.x + 200)
@@ -84,7 +84,7 @@ let Bullet = function (x, y) {
 
 function creatNewBullet() {
     countbullet++;
-    bullet[countbullet] = new Bullet(plane.x + 24, plane.y);
+    bullet[countbullet] = new Bullet(plane.x + 20, plane.y);
 }
 
 function StartGame() {
