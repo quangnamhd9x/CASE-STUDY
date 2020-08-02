@@ -4,9 +4,6 @@
     <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/plane.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/plane.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sound/killer.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/sound/killer.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sound/lose.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/sound/lose.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sound/nhacnen.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/sound/nhacnen.mp3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +61,8 @@
       <workItem from="1596264112362" duration="684000" />
       <workItem from="1596273964610" duration="751000" />
       <workItem from="1596292691495" duration="8197000" />
-      <workItem from="1596331721181" duration="11300000" />
+      <workItem from="1596331721181" duration="12884000" />
+      <workItem from="1596380412981" duration="2831000" />
     </task>
     <servers />
   </component>
