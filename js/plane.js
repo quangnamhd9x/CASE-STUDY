@@ -20,7 +20,7 @@ function moveMouse(event) {
 }
 
 function music() {
-    nhacNen = new Audio("sound/nhacnen.mp3");
+    nhacnen = new Audio("sound/nhacnen.mp3");
     soundGetScore = new Audio("sound/killer.mp3");
     soundBullet = new Audio("sound/bullet.mp3");
     soundLose = new Audio("sound/lose.mp3");
@@ -38,8 +38,9 @@ let Plane = function (x, y) {
         if ((lose.x > this.x && lose.x + 30 < this.x + 50)
             && (lose.y + 20 > this.y && lose.y < this.y + 100)) {
             lose.y += 800;
-            soundLose.play();
             lose.isExist = false;
+            nhacnen.pause();
+            soundLose.play();
             clearInterval(ping1);
             clearInterval(ping2);
             clearInterval(ping3);
@@ -113,6 +114,7 @@ function StartGame() {
     ping1 = setInterval(drawALL, 30);
     ping2 = setInterval(creatNewEnemy, 1000);
     ping3 = setInterval(creatNewBullet, 100);
+    nhacnen.play();
 }
 
 function drawALL() {
@@ -132,11 +134,6 @@ function drawALL() {
     plane.creatPlane();
     document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
     document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
-    if (lostPlane < 20){
-        nhacNen.play();
-    } else if (lostPlane === 20){
-        soundLose.play();
-    }
     endGame(lostPlane);
 
     function endGame(lost) {
