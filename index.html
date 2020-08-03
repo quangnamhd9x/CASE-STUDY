@@ -71,7 +71,7 @@
             let randomX = Math.floor(Math.random() * (700)) + 1;
             enemy[count] = new Enemy(randomX, -100);
             bullet[countBullet] = new Bullet(randomX, +100);
-            plane = new Plane(300, 500);
+            plane = new Plane(300, 450);
             music();
             ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
             ping2 = setInterval(creatNewEnemy, 1000);               //
