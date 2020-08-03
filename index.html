@@ -14,9 +14,11 @@
             <canvas id="myCanvas" width="900" height="585"></canvas>
         </td>
         <div id="score"></div>
-        <div id="lostplane"></div>
+<!--        <div id="lostplane"></div>-->
     </tr>
     <script>
+        alert("Tiêu diệt 100 Enemy để chiến thắng");
+        alert("Nếu chạm vào Enemy nhiệm vụ thất bại");
         let lostPlane = 0;  //giá trị của các chức năng
         let score = 0;
         let canvas = document.getElementById("myCanvas");
@@ -54,8 +56,12 @@
                 speed += 3;
                 remainPoint = 0;
             }
-            document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
-            document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
+            document.getElementById('score').innerHTML = "Tiêu diệt: " + score + " of 100" ;
+            if (score === 100) {
+                alert("Winner!");
+                window.location.reload();
+            }
+            // document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
             nhacnen.play();
             checkPoint();
             endGame(lostPlane);
@@ -69,7 +75,7 @@
             music();
             ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
             ping2 = setInterval(creatNewEnemy, 1000);               //
-            ping3 = setInterval(creatNewBullet, 200);               //
+            ping3 = setInterval(creatNewBullet, 100);               //
         }
 
 
