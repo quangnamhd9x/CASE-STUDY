@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="" />
+    <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/img/bar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Bar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/bullet.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/bullet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/enemy.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/enemy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/plane.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/plane.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,7 +69,8 @@
       <workItem from="1596292691495" duration="8197000" />
       <workItem from="1596331721181" duration="12884000" />
       <workItem from="1596380412981" duration="2891000" />
-      <workItem from="1596416707570" duration="3680000" />
+      <workItem from="1596416707570" duration="25187000" />
+      <workItem from="1596466460992" duration="12988000" />
     </task>
     <servers />
   </component>
@@ -75,5 +85,13 @@
       <screen x="0" y="11" width="1366" height="757" />
     </state>
     <state x="171" y="24" key="SettingsEditor/0.11.1366.757@0.11.1366.757" timestamp="1596274058238" />
+    <state x="64" y="161" key="run.anything.popup" timestamp="1596451434298">
+      <screen x="0" y="0" width="1366" height="734" />
+    </state>
+    <state x="64" y="161" key="run.anything.popup/0.0.1366.734@0.0.1366.734" timestamp="1596451434298" />
+    <state x="63" y="55" width="672" height="60" key="search.everywhere.popup" timestamp="1596437224812">
+      <screen x="0" y="0" width="1366" height="734" />
+    </state>
+    <state x="63" y="55" width="672" height="60" key="search.everywhere.popup/0.0.1366.734@0.0.1366.734" timestamp="1596437224812" />
   </component>
 </project>

@@ -5,6 +5,7 @@
     <title>Bảo Vệ Trái Đất</title>
 
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body onload="StartGame()">
 <table>
@@ -16,9 +17,6 @@
         <div id="lostplane"></div>
     </tr>
     <script>
-        alert("Trái Đất năm 2900, công nghệ ngoài vũ trụ đã xâm lăng Trái Đất");
-        alert("Nhiệm vụ của bạn là ngăn chặn vòng ngoài");
-        alert("nếu quá 20 tàu vũ trụ sẽ thua");
         let lostPlane = 0;  //giá trị của các chức năng
         let score = 0;
         let canvas = document.getElementById("myCanvas");
@@ -42,48 +40,25 @@
             soundBullet = new Audio("sound/bullet.mp3");
             soundLose = new Audio("sound/lose.mp3");
         }
-        function creatNewEnemy() {              //khởi tạo nhiều vị trí địch trên màn hình
-            count++;
-            let randomX = Math.floor(Math.random() * (750)) + 100;
-            enemy[count] = new Enemy(randomX, -100);
-        }
+
         function drawALL() {                //vẽ toàn bộ đối tượng trên màn hình
             ctx.clearRect(0, 0, 900, 585);
             for (let i = 0; i < enemy.length; i++) {
                 enemy[i].creatEnemy();
-                bullet[bullet.length - 6].checkPoint(enemy[i]);
-                plane.checkLose(enemy[i]);
             }
             for (let j = 0; j < bullet.length; j++) {
                 bullet[j].creatBullet();
             }
+            plane.creatPlane();
             if (remainPoint > 20) {
                 speed += 3;
                 remainPoint = 0;
             }
-            plane.creatPlane();
             document.getElementById('score').innerHTML = "Tiêu diệt: " + score;
             document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
             nhacnen.play();
+            checkPoint();
             endGame(lostPlane);
-
-            function endGame(lost) {            // hiển thị gameover
-                if (lost === 20) {
-                    soundLose.play();
-                    clearInterval(ping1);
-                    clearInterval(ping2);
-                    clearInterval(ping3);
-                    thongBao = window.confirm("YOU LOSE! Again?");
-                    if (thongBao) {
-                        window.location.reload();
-                    }
-                }
-            }
-        }
-        function creatNewBullet() {             // tạo nhiều đạn trên màn hình
-            soundBullet.play();
-            countBullet++;
-            bullet[countBullet] = new Bullet(plane.x + 19, plane.y);
         }
 
         function StartGame() {              //tạo các đối tượng trên màn hình bao gồm cả tốc độ
@@ -94,10 +69,12 @@
             music();
             ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
             ping2 = setInterval(creatNewEnemy, 1000);               //
-            ping3 = setInterval(creatNewBullet, 100);               //
+            ping3 = setInterval(creatNewBullet, 200);               //
         }
 
+
     </script>
+    <script src="js/Main.js"></script>
     <script src="js/plane.js"></script>
     <script src="js/enemy.js"></script>
     <script src="js/bullet.js"></script>
