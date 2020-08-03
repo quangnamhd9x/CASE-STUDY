@@ -12,24 +12,23 @@
         <td>
             <canvas id="myCanvas" width="900" height="585"></canvas>
         </td>
-        <div><label id="score"></label></div>
-        <div><label id="lostplane"></label> (20 is Lose)</div>
+        <div id="score"></div>
+        <div id="lostplane"></div>
     </tr>
     <script>
+        alert("Trái Đất năm 2900, công nghệ ngoài vũ trụ đã xâm lăng Trái Đất");
+        alert("Nhiệm vụ của bạn là ngăn chặn vòng ngoài");
+        alert("nếu quá 20 tàu vũ trụ sẽ thua");
         let lostPlane = 0;  //giá trị của các chức năng
         let score = 0;
         let canvas = document.getElementById("myCanvas");
         let ctx = canvas.getContext("2d");
         let enemy = [];
         let bullet = [];
-        let plane;
         let countBullet = 0;
         let count = 0;
         let speed = 4;
         let remainPoint = 0;
-        let ping1;
-        let ping2;
-        let ping3;
         window.addEventListener("mousemove", moveMouse);    // bắt tọa độ chuột
 
         function moveMouse(event) {
