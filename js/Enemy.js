@@ -7,7 +7,7 @@ class Enemy {
         this.image.src = "img/enemy1.png";
         this.creatEnemy = function () {
             this.y += this.move;
-            ctx.drawImage(this.image, this.x, this.y, 70, 70);
+            ctx.drawImage(this.image, this.x, this.y, 90, 90);
         }
     }
 }
