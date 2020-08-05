@@ -16,5 +16,5 @@ function creatNewEnemy() {              //khởi tạo nhiều vị trí địch
     count++;
     let randomX = Math.floor(Math.random() * (750)) + 100;
     enemy[count] = new Enemy(randomX, 0);
-    countHPEnemy = 3;
+    countHPEnemy = 2;
 }
