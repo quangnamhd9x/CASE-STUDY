@@ -11,6 +11,7 @@ class Enemy {
             ctx.drawImage(this.image, this.x, this.y, 50, 50);
         }
     }
+
 }
 function creatNewEnemy() {              //khởi tạo nhiều vị trí địch trên màn hình
     count++;

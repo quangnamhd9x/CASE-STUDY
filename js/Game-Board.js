@@ -25,7 +25,8 @@ function checkPoint() {
                 countHPEnemy--;
                 bullet[j].y -= 8000
                 if (countHPEnemy === 0) {
-                    enemy[i].y += 8000;
+                    enemy[i].image.src = "img/boom.png";
+                    setTimeout(function(){enemy[i].y += 8000; }, 200);
                     bullet[j].y -= 8000;
                     score += 1;
                     soundGetScore.play();
