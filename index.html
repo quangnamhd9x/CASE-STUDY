@@ -13,10 +13,10 @@
         <td>
             <div id="score"></div>
         </td>
-        <td rowspan="3">
+        <td rowspan="4">
             <canvas id="myCanvas" width="1000" height="650"></canvas>
         </td>
-        <td rowspan="3">
+        <td rowspan="4">
             <div>
                 <h1>Hướng dẫn: </h1>
                 <p>Di chuyển chuột quanh màn hình để điều khiển Siêu nhân bắn dép trúng đĩa bay của địch, "Tiêu diệt 200
@@ -27,6 +27,11 @@
     <tr>
         <td>
             <div id="hpSP"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="lostplane"></div>
         </td>
     </tr>
     <tr>
@@ -76,11 +81,11 @@
         }
         document.getElementById('score').innerHTML = "Tiêu diệt: " + "<br>" + score + " of 100";
         document.getElementById('hpEnemy').innerHTML = "HP Enemy " + countHPEnemy;
+        document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
         if (score === 200) {
             alert("Winner!");
             window.location.reload();
         }
-        // document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
         nhacnen.play();
         checkPoint();
         endGame(lostPlane);

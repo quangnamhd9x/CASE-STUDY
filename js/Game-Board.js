@@ -26,7 +26,7 @@ function checkPoint() {
                 bullet[j].y -= 8000
                 if (countHPEnemy === 0) {
                     enemy[i].image.src = "img/boom.png";
-                    setTimeout(function(){enemy[i].y += 8000; }, 200);
+                    setTimeout(function(){enemy[i].y -= 800000; }, 200);
                     bullet[j].y -= 8000;
                     score += 1;
                     soundGetScore.play();
@@ -36,17 +36,17 @@ function checkPoint() {
             } else if (crashPlane.isCrash()) {
                 soundLose.play();
                 nhacnen.pause();
-                clearInterval(ping1);
-                clearInterval(ping2);
-                clearInterval(ping3);
                 let status = window.confirm("YOU LOSE! Again?");
                 if (status) {
                     window.location.reload();
                     break;
                 }
-            } else if (enemy[i] > 580){
-                crashPlane++;
+            }  if (enemy[i].y > canvas.height){
+                enemy[i].x = -1000;
+                enemy[i].y = -1000;
+                lostPlane++;
             }
+
         }
     }
 }
