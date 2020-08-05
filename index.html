@@ -48,11 +48,12 @@
     let canvas = document.getElementById("myCanvas");
     let ctx = canvas.getContext("2d");
     let enemy = [];
-    // let items = [];
-    // let countItems = 0;
+    let count = 0;
+    let items = [];
+    let countItems = 0;
     let bullet = [];
     let countBullet = 0;
-    let count = 0;
+    let speedenemy = 4;
     let speed = 4;
     let remainPoint = 0;
     window.addEventListener("mousemove", moveMouse);    // bắt tọa độ chuột
@@ -80,12 +81,12 @@
         for (let j = 0; j < bullet.length; j++) {
             bullet[j].creatBullet();
         }
-        // for (let k = 0; k < items.length; k++) {
-        //     items[k].createItems();
-        // }
+        for (let k = 0; k < items.length; k++) {
+            items[k].creatItems();
+        }
         plane.creatPlane();
         if (remainPoint > 20) {
-            speed += 3;
+            speedenemy += 3;
             remainPoint = 0;
         }
         document.getElementById('score').innerHTML = "Tiêu diệt: " + "<br>" + score + " of 100";
@@ -98,7 +99,7 @@
         }
         nhacnen.play();
         checkPoint();
-        // checkItems();
+        // checkGift()
         endGame(lostPlane);
     }
 
@@ -106,19 +107,19 @@
         let randomX = Math.floor(Math.random() * (700)) + 1;
         enemy[count] = new Enemy(randomX, -100);
         bullet[countBullet] = new Bullet(randomX, +100);
-        // items[countItems] = new Items(randomX, -100);
+        items[countItems] = new Items(randomX, +100);
         plane = new Plane(300, 550);
         music();
         ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
         ping2 = setInterval(creatNewEnemy, 1500);               //
         ping3 = setInterval(creatNewBullet, 150);
-        // ping4 = setInterval(creatNewItems, 1000);
+        ping4 = setInterval(creatNewItems, 5000);
     }
 </script>
 <script src="js/Game-Board.js"></script>
 <script src="js/Plane.js"></script>
 <script src="js/Enemy.js"></script>
-<!--<script src="js/Items.js"></script>-->
+<script src="js/Items.js"></script>
 <script src="js/Bullet.js"></script>
 </table>
 </body>

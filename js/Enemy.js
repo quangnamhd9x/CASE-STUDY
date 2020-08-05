@@ -5,7 +5,6 @@ class Enemy {
         this.move = speed;
         this.image = new Image();
         this.image.src = "img/enemy1.png";
-
         this.creatEnemy = function () {
             this.y += this.move;
             ctx.drawImage(this.image, this.x, this.y, 70, 70);

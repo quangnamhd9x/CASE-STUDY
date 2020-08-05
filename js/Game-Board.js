@@ -21,6 +21,7 @@ function checkPoint() {
         for (let j = 0; j < bullet.length; j++) {
             let crash = new Crash(bullet[j], enemy[i]);
             let crashPlane = new Crash(plane, enemy[i]);
+            // let crashItems = new Crash(plane, items[i]);
             if (crash.isCrash()) {
                 enemy[i].image.src = "img/enemycrash.png";
                 setTimeout(function () {
@@ -47,7 +48,7 @@ function checkPoint() {
                 plane.image.src = "img/HP.png";
                 setTimeout(function () {
                     plane.image.src = "img/plane.png";
-                }, 200);
+                }, 300);
                 if (countHPSuperman === 0) {
                     soundLose.play();
                     nhacnen.pause();
@@ -63,20 +64,24 @@ function checkPoint() {
                 enemy[i].x = -1000;
                 enemy[i].y = -1000;
                 lostPlane++;
+            // } else if (crashItems.isCrash()) {
+            //     items[i].y -= 99999;
+            //     countHPSuperman += 10;
+            //     lostPlane -= 10;
+            //     continue;
             }
-
         }
     }
 }
 
-// function checkItems() {
-//     for (let i = 0; i < items.length; i++) {
-//             let crashItems = new Crash(plane, items[i]);
-//             if (crashItems.isCrash()) {
-//                 setTimeout(function () {
-//                     ping3 = setInterval(creatNewBullet, 50);}, 200);
-//             }
+// function checkGift(){
+//     for (let i = 0; i < enemy.length; i++) {
+//         if (crashItems.isCrash()) {
+//             items[i].y -= 99999;
+//             countHPSuperman += 10;
+//             lostPlane -= 10;
 //         }
+//     }
 // }
 function endGame(lost) {
     if (lost === 20) {
