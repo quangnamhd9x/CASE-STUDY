@@ -5,14 +5,16 @@ class Enemy {
         this.move = speed;
         this.image = new Image();
         this.image.src = "img/enemy1.png";
+
         this.creatEnemy = function () {
             this.y += this.move;
-            ctx.drawImage(this.image, this.x, this.y, 90, 90);
+            ctx.drawImage(this.image, this.x, this.y, 50, 50);
         }
     }
 }
 function creatNewEnemy() {              //khởi tạo nhiều vị trí địch trên màn hình
     count++;
     let randomX = Math.floor(Math.random() * (750)) + 100;
-    enemy[count] = new Enemy(randomX, -10);
+    enemy[count] = new Enemy(randomX, 0);
+    countHPEnemy = 3;
 }

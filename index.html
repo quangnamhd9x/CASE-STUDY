@@ -11,79 +11,96 @@
 <table>
     <tr>
         <td>
-            <canvas id="myCanvas" width="900" height="585"></canvas>
+            <div id="score"></div>
         </td>
-        <div id="score"></div>
-<!--        <div id="lostplane"></div>-->
+        <td rowspan="3">
+            <canvas id="myCanvas" width="1000" height="650"></canvas>
+        </td>
+        <td rowspan="3">
+            <div>
+                <h1>Hướng dẫn: </h1>
+                <p>Di chuyển chuột quanh màn hình để điều khiển Siêu nhân bắn dép trúng đĩa bay của địch, "Tiêu diệt 200
+                    đĩa bay để chiến thắng</p>
+            </div>
+        </td>
     </tr>
-    <script>
-        alert("Tiêu diệt 100 Enemy để chiến thắng");
-        alert("Nếu chạm vào Enemy nhiệm vụ thất bại");
-        let lostPlane = 0;  //giá trị của các chức năng
-        let score = 0;
-        let canvas = document.getElementById("myCanvas");
-        let ctx = canvas.getContext("2d");
-        let enemy = [];
-        let bullet = [];
-        let countBullet = 0;
-        let count = 0;
-        let speed = 4;
-        let remainPoint = 0;
-        window.addEventListener("mousemove", moveMouse);    // bắt tọa độ chuột
+    <tr>
+        <td>
+            <div id="hpSP"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="hpEnemy"></div>
+        </td>
+    </tr>
+</table>
+<script>
+    let countHPSuperman = 1;
+    let lostPlane = 0;  //giá trị của các chức năng
+    let score = 0;
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    let enemy = [];
+    let bullet = [];
+    let countBullet = 0;
+    let count = 0;
+    let speed = 4;
+    let remainPoint = 0;
+    window.addEventListener("mousemove", moveMouse);    // bắt tọa độ chuột
 
-        function moveMouse(event) {
-            let canvas_x = event.pageX - 9;
-            plane.x = canvas_x - 260;               // máy bay bắt theo tọa độ chuột
+    function moveMouse(event) {
+        let canvas_x = event.pageX;
+        plane.x = canvas_x - 200;               // máy bay bắt theo tọa độ chuột
+    }
+
+    function music() {          // nhạc dùng trong game
+        nhacnen = new Audio("sound/nhacnen.mp3");
+        soundGetScore = new Audio("sound/killer.mp3");
+        soundBullet = new Audio("sound/bullet.mp3");
+        soundLose = new Audio("sound/lose.mp3");
+    }
+
+    function drawALL() {                //vẽ toàn bộ đối tượng trên màn hình
+        ctx.clearRect(0, 0, 1000, 650);
+        for (let i = 0; i < enemy.length; i++) {
+            enemy[i].creatEnemy();
         }
-
-        function music() {          // nhạc dùng trong game
-            nhacnen = new Audio("sound/nhacnen.mp3");
-            soundGetScore = new Audio("sound/killer.mp3");
-            soundBullet = new Audio("sound/bullet.mp3");
-            soundLose = new Audio("sound/lose.mp3");
+        for (let j = 0; j < bullet.length; j++) {
+            bullet[j].creatBullet();
         }
-
-        function drawALL() {                //vẽ toàn bộ đối tượng trên màn hình
-            ctx.clearRect(0, 0, 900, 585);
-            for (let i = 0; i < enemy.length; i++) {
-                enemy[i].creatEnemy();
-            }
-            for (let j = 0; j < bullet.length; j++) {
-                bullet[j].creatBullet();
-            }
-            plane.creatPlane();
-            if (remainPoint > 20) {
-                speed += 3;
-                remainPoint = 0;
-            }
-            document.getElementById('score').innerHTML = "Tiêu diệt: " + score + " of 100" ;
-            if (score === 100) {
-                alert("Winner!");
-                window.location.reload();
-            }
-            // document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
-            nhacnen.play();
-            checkPoint();
-            endGame(lostPlane);
+        plane.creatPlane();
+        if (remainPoint > 20) {
+            speed += 3;
+            remainPoint = 0;
         }
-
-        function StartGame() {              //tạo các đối tượng trên màn hình bao gồm cả tốc độ
-            let randomX = Math.floor(Math.random() * (700)) + 1;
-            enemy[count] = new Enemy(randomX, -100);
-            bullet[countBullet] = new Bullet(randomX, +100);
-            plane = new Plane(300, 450);
-            music();
-            ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
-            ping2 = setInterval(creatNewEnemy, 1000);               //
-            ping3 = setInterval(creatNewBullet, 200);               //
+        document.getElementById('score').innerHTML = "Tiêu diệt: " + "<br>" + score + " of 100";
+        document.getElementById('hpEnemy').innerHTML = "HP Enemy " + countHPEnemy;
+        if (score === 200) {
+            alert("Winner!");
+            window.location.reload();
         }
+        // document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
+        nhacnen.play();
+        checkPoint();
+        endGame(lostPlane);
+    }
 
-
-    </script>
-    <script src="js/Game-Board.js"></script>
-    <script src="js/Plane.js"></script>
-    <script src="js/Enemy.js"></script>
-    <script src="js/Bullet.js"></script>
+    function StartGame() {              //tạo các đối tượng trên màn hình bao gồm cả tốc độ
+        let randomX = Math.floor(Math.random() * (700)) + 1;
+        enemy[count] = new Enemy(randomX, -100);
+        bullet[countBullet] = new Bullet(randomX, +100);
+        plane = new Plane(300, 550);
+        music();
+        ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
+        ping2 = setInterval(creatNewEnemy, 1000);               //
+        ping3 = setInterval(creatNewBullet, 100);               //
+    }
+</script>
+<script src="js/Game-Board.js"></script>
+<script src="js/Plane.js"></script>
+<script src="js/Enemy.js"></script>
+<script src="js/Bullet.js"></script>
 </table>
 </body>
 </html>

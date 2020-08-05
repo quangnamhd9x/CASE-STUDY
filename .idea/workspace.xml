@@ -65,7 +65,10 @@
       <workItem from="1596416707570" duration="25187000" />
       <workItem from="1596466460992" duration="17551000" />
       <workItem from="1596498345309" duration="775000" />
-      <workItem from="1596504872934" duration="1704000" />
+      <workItem from="1596504872934" duration="3661000" />
+      <workItem from="1596528594643" duration="5000" />
+      <workItem from="1596546088040" duration="30000" />
+      <workItem from="1596608885764" duration="1082000" />
     </task>
     <servers />
   </component>
@@ -76,6 +79,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="465" y="124" width="426" height="484" key="FileChooserDialogImpl" timestamp="1596609612964">
+      <screen x="0" y="0" width="1366" height="734" />
+    </state>
+    <state x="465" y="124" width="426" height="484" key="FileChooserDialogImpl/0.0.1366.734@0.0.1366.734" timestamp="1596609612964" />
     <state x="171" y="24" key="SettingsEditor" timestamp="1596274058238">
       <screen x="0" y="11" width="1366" height="757" />
     </state>

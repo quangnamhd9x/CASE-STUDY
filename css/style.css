@@ -23,5 +23,14 @@ table {
 
 div {
     font-family: sans-serif;
-    color: orangered;
+    color: aqua;
+    width: 160px;
+    height: 220px;
+    text-align: center;
+}
+#hpSP {
+    ;
+}
+#hpEnemy {
+    font-size: 20px;
 }

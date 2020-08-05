@@ -1,13 +1,13 @@
 class Crash {
     constructor(obj1, obj2) {
         this.left1 = obj1.x;
-        this.right1 = obj1.x + 70;
+        this.right1 = obj1.x + 50;
         this.top1 = obj1.y;
-        this.bottom1 = obj1.y + 70;
+        this.bottom1 = obj1.y + 50;
         this.left2 = obj2.x;
-        this.right2 = obj2.x + 70;
+        this.right2 = obj2.x + 50;
         this.top2 = obj2.y;
-        this.bottom2 = obj2.y + 70;
+        this.bottom2 = obj2.y + 50;
 
     }
 
@@ -22,11 +22,16 @@ function checkPoint() {
             let crash = new Crash(bullet[j], enemy[i]);
             let crashPlane = new Crash(plane, enemy[i]);
             if (crash.isCrash()) {
-                enemy[i].y += 8000;
-                bullet[j].y -= 8000;
-                score += 1;
-                soundGetScore.play();
-                remainPoint += 1;
+                countHPEnemy--;
+                bullet[j].y -= 8000
+                if (countHPEnemy === 0) {
+                    enemy[i].y += 8000;
+                    bullet[j].y -= 8000;
+                    score += 1;
+                    soundGetScore.play();
+                    remainPoint += 1;
+                }
+
             } else if (crashPlane.isCrash()) {
                 soundLose.play();
                 nhacnen.pause();
