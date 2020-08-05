@@ -22,6 +22,10 @@ function checkPoint() {
             let crash = new Crash(bullet[j], enemy[i]);
             let crashPlane = new Crash(plane, enemy[i]);
             if (crash.isCrash()) {
+                enemy[i].image.src = "img/enemycrash.png";
+                setTimeout(function () {
+                    enemy[i].image.src = "img/enemy1.png";
+                }, 70);
                 soundkill.play();
                 countHPEnemy--;
                 bullet[j].y -= 8000
@@ -40,10 +44,10 @@ function checkPoint() {
                 crashSuperman.play();
                 countHPSuperman--;
                 enemy[i].y -= 800000;
+                plane.image.src = "img/HP.png";
                 setTimeout(function () {
-                    plane.image.src = "img/HP.png";
+                    plane.image.src = "img/plane.png";
                 }, 200);
-
                 if (countHPSuperman === 0) {
                     soundLose.play();
                     nhacnen.pause();

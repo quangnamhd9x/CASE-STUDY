@@ -7,7 +7,7 @@ class Bullet {
         this.image.src = "img/bullet.png";
         this.creatBullet = function () {
             this.y -= this.move;
-            ctx.drawImage(this.image, this.x, this.y, 30, 40);
+            ctx.drawImage(this.image, this.x, this.y, 60, 100);
         }
     }
 }
