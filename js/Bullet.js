@@ -7,12 +7,12 @@ class Bullet {
         this.image.src = "img/bullet.png";
         this.creatBullet = function () {
             this.y -= this.move;
-            ctx.drawImage(this.image, this.x, this.y, 60, 100);
+            ctx.drawImage(this.image, this.x, this.y, 60, 80);
         }
     }
 }
 function creatNewBullet() {             // tạo nhiều đạn trên màn hình
     soundBullet.play();
     countBullet++;
-    bullet[countBullet] = new Bullet(plane.x + 10, plane.y - 50);
+    bullet[countBullet] = new Bullet(plane.x - 5, plane.y - 50);
 }

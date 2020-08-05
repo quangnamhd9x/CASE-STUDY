@@ -25,7 +25,7 @@ function checkPoint() {
                 enemy[i].image.src = "img/enemycrash.png";
                 setTimeout(function () {
                     enemy[i].image.src = "img/enemy1.png";
-                }, 70);
+                }, 100);
                 soundkill.play();
                 countHPEnemy--;
                 bullet[j].y -= 8000
@@ -33,7 +33,7 @@ function checkPoint() {
                     enemy[i].image.src = "img/boom.png";
                     setTimeout(function () {
                         enemy[i].y -= 800000;
-                    }, 200);
+                    }, 300);
                     bullet[j].y -= 8000;
                     score += 1;
                     soundGetScore.play();

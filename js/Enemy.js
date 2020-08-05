@@ -8,7 +8,7 @@ class Enemy {
 
         this.creatEnemy = function () {
             this.y += this.move;
-            ctx.drawImage(this.image, this.x, this.y, 50, 50);
+            ctx.drawImage(this.image, this.x, this.y, 70, 70);
         }
     }
 }
