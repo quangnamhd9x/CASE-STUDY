@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="css/style.css">
 
+
 </head>
 <body onload="StartGame()">
 <table>
@@ -41,12 +42,15 @@
     </tr>
 </table>
 <script>
-    let countHPSuperman = 1;
+    let remainHPSP = 0;
+    let countHPSuperman = 5;
     let lostPlane = 0;  //giá trị của các chức năng
     let score = 0;
     let canvas = document.getElementById("myCanvas");
     let ctx = canvas.getContext("2d");
     let enemy = [];
+    // let items = [];
+    // let countItems = 0;
     let bullet = [];
     let countBullet = 0;
     let count = 0;
@@ -64,6 +68,9 @@
         soundGetScore = new Audio("sound/killer.mp3");
         soundBullet = new Audio("sound/bullet.mp3");
         soundLose = new Audio("sound/lose.mp3");
+        lostPlaneAudio = new Audio("sound/lostplane.mp3");
+        crashSuperman = new Audio("sound/crashsp.mp3");
+        soundkill = new Audio("sound/killerli.mp3");
     }
 
     function drawALL() {                //vẽ toàn bộ đối tượng trên màn hình
@@ -74,6 +81,9 @@
         for (let j = 0; j < bullet.length; j++) {
             bullet[j].creatBullet();
         }
+        // for (let k = 0; k < items.length; k++) {
+        //     items[k].createItems();
+        // }
         plane.creatPlane();
         if (remainPoint > 20) {
             speed += 3;
@@ -82,12 +92,14 @@
         document.getElementById('score').innerHTML = "Tiêu diệt: " + "<br>" + score + " of 100";
         document.getElementById('hpEnemy').innerHTML = "HP Enemy " + countHPEnemy;
         document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
-        if (score === 200) {
+        document.getElementById('hpSP').innerHTML = "HP SuperMan " + countHPSuperman;
+        if (score === 100) {
             alert("Winner!");
             window.location.reload();
         }
         nhacnen.play();
         checkPoint();
+        // checkItems();
         endGame(lostPlane);
     }
 
@@ -95,16 +107,19 @@
         let randomX = Math.floor(Math.random() * (700)) + 1;
         enemy[count] = new Enemy(randomX, -100);
         bullet[countBullet] = new Bullet(randomX, +100);
+        // items[countItems] = new Items(randomX, -100);
         plane = new Plane(300, 550);
         music();
         ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
         ping2 = setInterval(creatNewEnemy, 1000);               //
-        ping3 = setInterval(creatNewBullet, 200);               //
+        ping3 = setInterval(creatNewBullet, 200);
+        // ping4 = setInterval(creatNewItems, 1000);
     }
 </script>
 <script src="js/Game-Board.js"></script>
 <script src="js/Plane.js"></script>
 <script src="js/Enemy.js"></script>
+<!--<script src="js/Items.js"></script>-->
 <script src="js/Bullet.js"></script>
 </table>
 </body>

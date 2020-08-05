@@ -22,11 +22,14 @@ function checkPoint() {
             let crash = new Crash(bullet[j], enemy[i]);
             let crashPlane = new Crash(plane, enemy[i]);
             if (crash.isCrash()) {
+                soundkill.play();
                 countHPEnemy--;
                 bullet[j].y -= 8000
                 if (countHPEnemy === 0) {
                     enemy[i].image.src = "img/boom.png";
-                    setTimeout(function(){enemy[i].y -= 800000; }, 200);
+                    setTimeout(function () {
+                        enemy[i].y -= 800000;
+                    }, 200);
                     bullet[j].y -= 8000;
                     score += 1;
                     soundGetScore.play();
@@ -34,14 +37,25 @@ function checkPoint() {
                 }
 
             } else if (crashPlane.isCrash()) {
-                soundLose.play();
-                nhacnen.pause();
-                let status = window.confirm("YOU LOSE! Again?");
-                if (status) {
-                    window.location.reload();
-                    break;
+                crashSuperman.play();
+                countHPSuperman--;
+                enemy[i].y -= 800000;
+                setTimeout(function () {
+                    plane.image.src = "img/HP.png";
+                }, 200);
+
+                if (countHPSuperman === 0) {
+                    soundLose.play();
+                    nhacnen.pause();
+                    let status = window.confirm("YOU LOSE! Again?");
+                    if (status) {
+                        window.location.reload();
+                        break;
+                    }
                 }
-            }  if (enemy[i].y > canvas.height){
+            }
+            if (enemy[i].y > canvas.height) {
+                lostPlaneAudio.play();
                 enemy[i].x = -1000;
                 enemy[i].y = -1000;
                 lostPlane++;
@@ -51,6 +65,15 @@ function checkPoint() {
     }
 }
 
+// function checkItems() {
+//     for (let i = 0; i < items.length; i++) {
+//             let crashItems = new Crash(plane, items[i]);
+//             if (crashItems.isCrash()) {
+//                 setTimeout(function () {
+//                     ping3 = setInterval(creatNewBullet, 50);}, 200);
+//             }
+//         }
+// }
 function endGame(lost) {
     if (lost === 20) {
         soundLose.play();

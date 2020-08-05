@@ -29,8 +29,11 @@ div {
     text-align: center;
 }
 #hpSP {
-    ;
+    font-size: 20px;;
 }
 #hpEnemy {
+    font-size: 20px;
+}
+#lostplane {
     font-size: 20px;
 }
