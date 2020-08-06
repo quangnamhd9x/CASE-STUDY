@@ -2,7 +2,7 @@ class Enemy {
     constructor(x, y) { //hiển thị tọa độ địch
         this.x = x;
         this.y = y;
-        this.move = speed;
+        this.move = speedenemy;
         this.image = new Image();
         this.image.src = "img/enemy1.png";
         this.creatEnemy = function () {
