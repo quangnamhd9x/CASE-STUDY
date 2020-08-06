@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/img/22.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/333.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/hp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/HP.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/plane.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/plane.png" afterDir="false" />
-    </list>
+    <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,7 +68,7 @@
       <workItem from="1596546088040" duration="30000" />
       <workItem from="1596608885764" duration="16966000" />
       <workItem from="1596642385555" duration="8597000" />
-      <workItem from="1596671812802" duration="1370000" />
+      <workItem from="1596671812802" duration="1682000" />
     </task>
     <servers />
   </component>

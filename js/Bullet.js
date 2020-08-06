@@ -14,5 +14,5 @@ class Bullet {
 function creatNewBullet() {             // tạo nhiều đạn trên màn hình
     soundBullet.play();
     countBullet++;
-    bullet[countBullet] = new Bullet(plane.x + 20, plane.y - 50);
+    bullet[countBullet] = new Bullet(plane.x + 27, plane.y - 50);
 }
