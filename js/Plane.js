@@ -5,7 +5,7 @@ class Plane {
         this.image = new Image();
         this.image.src = "img/plane.png";
         this.creatPlane = function () {
-            ctx.drawImage(this.image, this.x, this.y, 30, 90);
+            ctx.drawImage(this.image, this.x, this.y, 120, 60);
         }
     }
 }

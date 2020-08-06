@@ -25,14 +25,14 @@
         <td>
             <div id="hpSP"></div>
         </td>
-        <td><p>Di chuyển chuột quanh màn hình để điều khiển Siêu nhân bắn lửa trúng đĩa bay của địch, "Tiêu diệt 100
+        <td><p>Di chuyển chuột quanh màn hình để điều khiển Plane bắn lửa trúng đĩa bay của địch, "Tiêu diệt 100
             đĩa bay để chiến thắng</p></td>
     </tr>
     <tr>
         <td>
             <div id="lostplane"></div>
         </td>
-        <td><p>Mỗi lần va chạm với đĩa bay, HP SuperMan giảm đi 1 điểm</p></td>
+        <td><p>Mỗi lần va chạm với đĩa bay, HP Plane giảm đi 1 điểm</p></td>
     </tr>
     <tr>
         <td>
@@ -60,7 +60,7 @@
 
     function moveMouse(event) {
         let canvas_x = event.pageX;
-        plane.x = canvas_x - 200;               // máy bay bắt theo tọa độ chuột
+        plane.x = canvas_x - 227;               // máy bay bắt theo tọa độ chuột
     }
 
     function music() {          // nhạc dùng trong game
@@ -92,7 +92,7 @@
         document.getElementById('score').innerHTML = "Tiêu diệt: " + "<br>" + score + " of 100";
         document.getElementById('hpEnemy').innerHTML = "HP Enemy " + countHPEnemy;
         document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
-        document.getElementById('hpSP').innerHTML = "HP SuperMan " + countHPSuperman;
+        document.getElementById('hpSP').innerHTML = "HP Plane " + countHPSuperman;
         if (score === 100) {
             alert("Winner!");
             window.location.reload();
@@ -108,7 +108,7 @@
         enemy[count] = new Enemy(randomX, -100);
         bullet[countBullet] = new Bullet(randomX, +100);
         items[countItems] = new Items(randomX, +100);
-        plane = new Plane(300, 550);
+        plane = new Plane(300, 580);
         music();
         ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
         ping2 = setInterval(creatNewEnemy, 1500);               //
