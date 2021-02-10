@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="" />
+    <list default="true" id="e953d19c-2f44-4104-baf5-7c3fd1c46e05" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,7 +43,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -66,9 +68,7 @@
       <workItem from="1596504872934" duration="3661000" />
       <workItem from="1596528594643" duration="5000" />
       <workItem from="1596546088040" duration="30000" />
-      <workItem from="1596608885764" duration="16966000" />
-      <workItem from="1596642385555" duration="8597000" />
-      <workItem from="1596671812802" duration="1682000" />
+      <workItem from="1596608885764" duration="1082000" />
     </task>
     <servers />
   </component>
@@ -83,18 +83,17 @@
       <screen x="0" y="0" width="1366" height="734" />
     </state>
     <state x="465" y="124" width="426" height="484" key="FileChooserDialogImpl/0.0.1366.734@0.0.1366.734" timestamp="1596609612964" />
-    <state x="171" y="4" key="SettingsEditor" timestamp="1596642791311">
-      <screen x="0" y="0" width="1366" height="734" />
+    <state x="171" y="24" key="SettingsEditor" timestamp="1596274058238">
+      <screen x="0" y="11" width="1366" height="757" />
     </state>
-    <state x="171" y="4" key="SettingsEditor/0.0.1366.734@0.0.1366.734" timestamp="1596642791311" />
     <state x="171" y="24" key="SettingsEditor/0.11.1366.757@0.11.1366.757" timestamp="1596274058238" />
     <state x="64" y="161" key="run.anything.popup" timestamp="1596451434298">
       <screen x="0" y="0" width="1366" height="734" />
     </state>
     <state x="64" y="161" key="run.anything.popup/0.0.1366.734@0.0.1366.734" timestamp="1596451434298" />
-    <state x="63" y="55" width="672" height="160" key="search.everywhere.popup" timestamp="1596612720373">
+    <state x="63" y="55" width="672" height="160" key="search.everywhere.popup" timestamp="1596480184037">
       <screen x="0" y="0" width="1366" height="734" />
     </state>
-    <state x="63" y="55" width="672" height="160" key="search.everywhere.popup/0.0.1366.734@0.0.1366.734" timestamp="1596612720373" />
+    <state x="63" y="55" width="672" height="160" key="search.everywhere.popup/0.0.1366.734@0.0.1366.734" timestamp="1596480184037" />
   </component>
 </project>

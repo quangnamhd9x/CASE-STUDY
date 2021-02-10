@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-
 </head>
 <body onload="StartGame()">
 <table>
@@ -17,50 +16,47 @@
         <td rowspan="4">
             <canvas id="myCanvas" width="1000" height="650"></canvas>
         </td>
-        <td>
+        <td rowspan="4">
+            <div>
                 <h1>Hướng dẫn: </h1>
+                <p>Di chuyển chuột quanh màn hình để điều khiển Siêu nhân bắn dép trúng đĩa bay của địch, "Tiêu diệt 200
+                    đĩa bay để chiến thắng</p>
+            </div>
         </td>
     </tr>
     <tr>
         <td>
             <div id="hpSP"></div>
         </td>
-        <td><p>Di chuyển chuột quanh màn hình để điều khiển Plane bắn lửa trúng đĩa bay của địch, "Tiêu diệt 100
-            đĩa bay để chiến thắng</p></td>
     </tr>
     <tr>
         <td>
             <div id="lostplane"></div>
         </td>
-        <td><p>Mỗi lần va chạm với đĩa bay, HP Plane giảm đi 1 điểm</p></td>
     </tr>
     <tr>
         <td>
             <div id="hpEnemy"></div>
         </td>
-        <td> <p>20 đĩa bay vào Trái Đất, nhiệm vụ thất bại</p></td>
     </tr>
 </table>
 <script>
-    let countHPSuperman = 5;
+    let countHPSuperman = 1;
     let lostPlane = 0;  //giá trị của các chức năng
     let score = 0;
     let canvas = document.getElementById("myCanvas");
     let ctx = canvas.getContext("2d");
     let enemy = [];
-    let count = 0;
-    let items = [];
-    let countItems = 0;
     let bullet = [];
     let countBullet = 0;
-    let speedenemy = 4;
+    let count = 0;
     let speed = 4;
     let remainPoint = 0;
     window.addEventListener("mousemove", moveMouse);    // bắt tọa độ chuột
 
     function moveMouse(event) {
         let canvas_x = event.pageX;
-        plane.x = canvas_x - 235;               // máy bay bắt theo tọa độ chuột
+        plane.x = canvas_x - 200;               // máy bay bắt theo tọa độ chuột
     }
 
     function music() {          // nhạc dùng trong game
@@ -68,9 +64,6 @@
         soundGetScore = new Audio("sound/killer.mp3");
         soundBullet = new Audio("sound/bullet.mp3");
         soundLose = new Audio("sound/lose.mp3");
-        lostPlaneAudio = new Audio("sound/lostplane.mp3");
-        crashSuperman = new Audio("sound/crashsp.mp3");
-        soundkill = new Audio("sound/killerli.mp3");
     }
 
     function drawALL() {                //vẽ toàn bộ đối tượng trên màn hình
@@ -81,25 +74,20 @@
         for (let j = 0; j < bullet.length; j++) {
             bullet[j].creatBullet();
         }
-        for (let k = 0; k < items.length; k++) {
-            items[k].creatItems();
-        }
         plane.creatPlane();
         if (remainPoint > 20) {
-            speedenemy += 3;
+            speed += 3;
             remainPoint = 0;
         }
         document.getElementById('score').innerHTML = "Tiêu diệt: " + "<br>" + score + " of 100";
         document.getElementById('hpEnemy').innerHTML = "HP Enemy " + countHPEnemy;
         document.getElementById('lostplane').innerHTML = "Vào trái đất: " + lostPlane;
-        document.getElementById('hpSP').innerHTML = "HP Plane " + countHPSuperman;
-        if (score === 100) {
+        if (score === 200) {
             alert("Winner!");
             window.location.reload();
         }
         nhacnen.play();
         checkPoint();
-        // checkGift()
         endGame(lostPlane);
     }
 
@@ -107,19 +95,16 @@
         let randomX = Math.floor(Math.random() * (700)) + 1;
         enemy[count] = new Enemy(randomX, -100);
         bullet[countBullet] = new Bullet(randomX, +100);
-        items[countItems] = new Items(randomX, +100);
-        plane = new Plane(300, 580);
+        plane = new Plane(300, 550);
         music();
         ping1 = setInterval(drawALL, 30);                       //set time out cho đối tượng xuất hiện
-        ping2 = setInterval(creatNewEnemy, 1500);               //
-        ping3 = setInterval(creatNewBullet, 150);
-        ping4 = setInterval(creatNewItems, 5000);
+        ping2 = setInterval(creatNewEnemy, 1000);               //
+        ping3 = setInterval(creatNewBullet, 200);               //
     }
 </script>
 <script src="js/Game-Board.js"></script>
 <script src="js/Plane.js"></script>
 <script src="js/Enemy.js"></script>
-<script src="js/Items.js"></script>
 <script src="js/Bullet.js"></script>
 </table>
 </body>

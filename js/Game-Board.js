@@ -21,20 +21,12 @@ function checkPoint() {
         for (let j = 0; j < bullet.length; j++) {
             let crash = new Crash(bullet[j], enemy[i]);
             let crashPlane = new Crash(plane, enemy[i]);
-            // let crashItems = new Crash(plane, items[i]);
             if (crash.isCrash()) {
-                enemy[i].image.src = "img/enemycrash.png";
-                setTimeout(function () {
-                    enemy[i].image.src = "img/enemy1.png";
-                }, 100);
-                soundkill.play();
                 countHPEnemy--;
                 bullet[j].y -= 8000
                 if (countHPEnemy === 0) {
                     enemy[i].image.src = "img/boom.png";
-                    setTimeout(function () {
-                        enemy[i].y -= 800000;
-                    }, 300);
+                    setTimeout(function(){enemy[i].y -= 800000; }, 200);
                     bullet[j].y -= 8000;
                     score += 1;
                     soundGetScore.play();
@@ -42,47 +34,23 @@ function checkPoint() {
                 }
 
             } else if (crashPlane.isCrash()) {
-                crashSuperman.play();
-                countHPSuperman--;
-                enemy[i].y -= 800000;
-                plane.image.src = "img/HP.png";
-                setTimeout(function () {
-                    plane.image.src = "img/plane.png";
-                }, 300);
-                if (countHPSuperman === 0) {
-                    soundLose.play();
-                    nhacnen.pause();
-                    let status = window.confirm("YOU LOSE! Again?");
-                    if (status) {
-                        window.location.reload();
-                        break;
-                    }
+                soundLose.play();
+                nhacnen.pause();
+                let status = window.confirm("YOU LOSE! Again?");
+                if (status) {
+                    window.location.reload();
+                    break;
                 }
-            }
-            if (enemy[i].y > canvas.height) {
-                lostPlaneAudio.play();
+            }  if (enemy[i].y > canvas.height){
                 enemy[i].x = -1000;
                 enemy[i].y = -1000;
                 lostPlane++;
-            // } else if (crashItems.isCrash()) {
-            //     items[i].y -= 99999;
-            //     countHPSuperman += 10;
-            //     lostPlane -= 10;
-            //     continue;
             }
+
         }
     }
 }
 
-// function checkGift(){
-//     for (let i = 0; i < enemy.length; i++) {
-//         if (crashItems.isCrash()) {
-//             items[i].y -= 99999;
-//             countHPSuperman += 10;
-//             lostPlane -= 10;
-//         }
-//     }
-// }
 function endGame(lost) {
     if (lost === 20) {
         soundLose.play();
